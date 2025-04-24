@@ -50,6 +50,30 @@ class Git:
             text=True,
         )
 
+    def push(self):
+        subprocess.run(
+            shlex.split("git push"),
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+    def add(self, file: str):
+        subprocess.run(
+            shlex.split(f"git add {file}"),
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+    def commit(self, message: str):
+        subprocess.run(
+            shlex.split(f"git commit -m '{message}'"),
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
 def main():
     poetry = Poetry()
     git = Git()
@@ -61,6 +85,12 @@ def main():
         typer.echo(f"Version bumped to {poetry.version_read()}.")
         if git.is_git_repo():
             tag_name = f"v{poetry.version_read()}"
+
+            git.add("pyproject.toml")
+            git.commit(f"Released {tag_name}.")
+            git.push()
+            typer.echo("Pushed updated pyproject.toml.")
+
             git.create_tag(tag_name)
             git.push_tag(tag_name)
             typer.echo(f"Git tag {tag_name} created and pushed.")
