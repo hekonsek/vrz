@@ -2,6 +2,7 @@ import shlex
 import subprocess
 from typer import Typer
 import typer
+import requests as request
 
 class Poetry:
     def version_bump_minor(self):
@@ -20,6 +21,33 @@ class Poetry:
             text=True,
         )
         return output.stdout.strip()
+
+    def is_published(self, package_name):
+        url = f"https://pypi.org/pypi/{package_name}/json"
+        response = request.get(url)
+        return response.status_code != 404
+
+    def is_current_project_published(self):
+        project_name = self.project_name()
+        return self.is_published(project_name)
+
+    def publish(self):
+        subprocess.run(
+            shlex.split("poetry publish --build"),
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        return True
+
+    def project_name(self):
+        output = subprocess.run(
+            shlex.split("poetry version"),
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        return output.stdout.split()[0].strip()
 
 class Git:
     def is_git_repo(self):
@@ -94,6 +122,12 @@ def main():
             git.create_tag(tag_name)
             git.push_tag(tag_name)
             typer.echo(f"Git tag {tag_name} created and pushed.")
+
+        if poetry.is_current_project_published():
+            typer.echo("Publishing package to PyPI.")
+            poetry.publish()
+            typer.echo("Publishing to PyPI done.")
+
 
     @app.command()
     def latest():
