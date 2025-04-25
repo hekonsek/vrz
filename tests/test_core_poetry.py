@@ -1,4 +1,3 @@
-import pytest
 from vrz.core import Poetry  # Replace with the actual path to your Poetry class
 
 def test_inited_project_returns_project_name(tmp_path):
