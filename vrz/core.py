@@ -1,15 +1,47 @@
+from pathlib import Path
 import shlex
 import subprocess
 import requests as request
 
 
 class Poetry:
+    def __init__(self, working_dir: Path = None):
+        self.working_dir = working_dir
+
+    @classmethod
+    def init_project(cls, path: Path = None):
+        """
+        Initializes a new Poetry project in the specified directory.
+        If no path is provided, a temporary directory is created.
+
+        Returns:
+            Poetry: An instance of the Poetry class associated with the project directory.
+        """
+        if path is None:
+            temp_dir = tempfile.TemporaryDirectory()
+            project_path = Path(temp_dir.name)
+            project_path._temp_dir = temp_dir
+        else:
+            project_path = Path(path)
+            project_path.mkdir(parents=True, exist_ok=True)
+
+        subprocess.run(
+            shlex.split("poetry init -n"),
+            check=True,
+            capture_output=True,
+            text=True,
+            cwd=project_path,
+        )
+
+        return cls(working_dir=project_path)
+    
     def version_bump_minor(self):
         subprocess.run(
             shlex.split("poetry version minor"),
             check=True,
             capture_output=True,
             text=True,
+            cwd=self.working_dir,
         )
 
     def version_read(self):
@@ -18,6 +50,7 @@ class Poetry:
             check=True,
             capture_output=True,
             text=True,
+            cwd=self.working_dir,
         )
         return output.stdout.strip()
 
@@ -36,6 +69,7 @@ class Poetry:
             check=True,
             capture_output=True,
             text=True,
+            cwd=self.working_dir,
         )
         return True
 
@@ -45,9 +79,9 @@ class Poetry:
             check=True,
             capture_output=True,
             text=True,
+            cwd=self.working_dir,
         )
         return output.stdout.split()[0].strip()
-
 
 class Git:
     def is_git_repo(self):
