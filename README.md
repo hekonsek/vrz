@@ -7,7 +7,7 @@
 In order to add `vrz` into your Poetry project, execute the following command:
 
 ```bash
-poetry install --group=dev vrz
+poetry add --group=dev vrz
 ```
 
 You can also install `vrz` globally using pipx:
