@@ -8,7 +8,11 @@ def main():
     poetry = Poetry()
     git = Git()
     version_substitution = VersionSubstitution()
-    app = Typer(no_args_is_help=True)
+    
+    app = Typer(
+        no_args_is_help=True, 
+        help="vrz simplifies versioning and releases of software packages. Created primarily for Python, but can be used with other language platforms as well."
+        )
 
     @app.command()
     def minor(update_file: Optional[list[str]] = typer.Option(default=None)):
@@ -44,6 +48,7 @@ def main():
 
     @app.command()
     def latest():
+        """Get the latest version of the package."""
         typer.echo(poetry.version_read())
 
     app()
