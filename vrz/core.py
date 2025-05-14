@@ -64,13 +64,18 @@ class Poetry:
         return self.is_published(project_name)
 
     def publish(self):
-        subprocess.run(
-            shlex.split("poetry publish --build"),
-            check=True,
-            capture_output=True,
-            text=True,
-            cwd=self.working_dir,
-        )
+        try:
+            subprocess.run(
+                shlex.split("poetry publish --build"),
+                check=True,
+                capture_output=True,
+                text=True,
+                cwd=self.working_dir,
+            )
+        except subprocess.CalledProcessError as e:
+            print("STDOUT:\n", e.stdout)
+            print("STDERR:\n", e.stderr)
+            raise    
         return True
 
     def project_name(self):
