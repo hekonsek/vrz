@@ -22,9 +22,9 @@ In order to release new minor version of your application, execute the `vrz mino
 
 ```
 $ vrz minor
-Version bumped to 0.25.0.
+Version bumped to 0.26.0.
 Pushed updated pyproject.toml.
-Git tag v0.25.0 created and pushed.
+Git tag v0.26.0 created and pushed.
 Publishing package to PyPI.
 Publishing to PyPI done.
 ```
