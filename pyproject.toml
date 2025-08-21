@@ -26,4 +26,5 @@ vrz = "vrz.cli:main"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"
+check-depz = "^0.15.0"
 

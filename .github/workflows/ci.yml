@@ -25,4 +25,6 @@ jobs:
         git config --global user.email "hekonsek@gmail.com"
     - name: Run tests
       run: poetry run pytest
+    - name: Check dependencies
+      run: poetry run check-depz
 
