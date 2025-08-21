@@ -31,7 +31,8 @@ Publishing to PyPI done.
 
 `vrz` will:
 - bump your `pyproject.toml` project version (if Poetry project is detected)
-- commit and push `pyproject.toml` (if Git repository is detected)
+- commit and push `pyproject.toml` (if Poetry project is detected)
+- create and push Git tag
 - publish package to PyPI (if current project is already present in PyPI index)
 
 ## License
