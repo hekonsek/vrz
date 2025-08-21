@@ -1,6 +1,8 @@
 from pathlib import Path
 import shlex
 import subprocess
+import tempfile
+import tomllib
 import requests as request
 
 
@@ -34,6 +36,48 @@ class Poetry:
         )
 
         return cls(working_dir=project_path)
+
+    def is_poetry_project(self, directory: Path = None) -> bool:
+        """Check whether the directory is a Poetry project.
+
+        A directory is considered a Poetry project when it contains a
+        ``pyproject.toml`` file created by Poetry. This may be a legacy
+        ``[tool.poetry]`` configuration or a modern PEP 621 ``[project]``
+        table using Poetry's build backend.
+
+        Args:
+            directory (Path, optional): Directory to check. If ``None``, the
+                instance's ``working_dir`` is used.
+
+        Returns:
+            bool: ``True`` if the directory represents a Poetry project,
+            ``False`` otherwise.
+        """
+        dir_path = Path(directory) if directory is not None else self.working_dir
+        if dir_path is None:
+            return False
+
+        pyproject = dir_path / "pyproject.toml"
+        if not pyproject.is_file():
+            return False
+
+        try:
+            data = tomllib.loads(pyproject.read_text(encoding="utf-8"))
+        except (OSError, tomllib.TOMLDecodeError):
+            return False
+
+        # Poetry 1.x uses the legacy ``[tool.poetry]`` table
+        tool = data.get("tool", {})
+        if "poetry" in tool:
+            return True
+
+        # Poetry 2.x uses PEP 621 ``[project]`` table with Poetry's build backend
+        project = data.get("project")
+        build_backend = data.get("build-system", {}).get("build-backend")
+        if project and build_backend == "poetry.core.masonry.api":
+            return True
+
+        return False
     
     def version_bump_minor(self):
         subprocess.run(
