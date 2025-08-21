@@ -26,4 +26,6 @@ jobs:
         git config --global user.name "GitHub Action"
         git config --global user.email "hekonsek@gmail.com"
     - name: Release version
+      env:
+        POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_API_TOKEN }}   
       run: poetry run vrz minor --update-file=README.md
