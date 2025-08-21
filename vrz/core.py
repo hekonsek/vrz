@@ -185,6 +185,17 @@ class Git:
             text=True,
         )
 
+    def list_tags(self):
+        """Return list of Git tags sorted alphanumerically ascending."""
+        result = subprocess.run(
+            shlex.split("git tag --list --sort=version:refname"),
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        tags = result.stdout.strip().splitlines()
+        return tags
+
 
 class VersionSubstitution:
     def replace_version(self, file_path: str, old_version: str, new_version: str):
