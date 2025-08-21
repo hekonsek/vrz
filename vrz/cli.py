@@ -28,6 +28,10 @@ def main():
     def minor(update_file: Optional[list[str]] = typer.Option(default=None)):
         is_poetry_project = poetry.is_poetry_project(Path.cwd())
 
+        if not git.is_git_repo():
+            typer.echo("Not a git repository.")
+            raise typer.Exit(code=1)
+
         if is_poetry_project:
             old_version = poetry.version_read()
             poetry.version_bump_minor()
@@ -39,18 +43,17 @@ def main():
             new_version = _bump_minor(old_version)
             typer.echo(f"Version bumped to {new_version}.")
 
-        if git.is_git_repo():
-            tag_name = f"v{new_version}"
+        tag_name = f"v{new_version}"
 
-            if is_poetry_project:
-                git.add("pyproject.toml")
-                git.commit(f"Released {tag_name}.")
-                git.push()
-                typer.echo("Pushed updated pyproject.toml.")
+        if is_poetry_project:
+            git.add("pyproject.toml")
+            git.commit(f"Released {tag_name}.")
+            git.push()
+            typer.echo("Pushed updated pyproject.toml.")
 
-            git.create_tag(tag_name)
-            git.push_tag(tag_name)
-            typer.echo(f"Git tag {tag_name} created and pushed.")
+        git.create_tag(tag_name)
+        git.push_tag(tag_name)
+        typer.echo(f"Git tag {tag_name} created and pushed.")
 
         if update_file:
             for file in update_file:
