@@ -2,12 +2,16 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 import shlex
 import subprocess
 
 
 class Git:
     """Simple wrapper around common Git commands."""
+
+    def __init__(self, path: Path = Path.cwd()) -> None:
+        self.path = path
 
     def is_git_repo(self) -> bool:
         try:
@@ -16,6 +20,7 @@ class Git:
                 check=True,
                 capture_output=True,
                 text=True,
+                cwd=self.path,
             )
             return True
         except subprocess.CalledProcessError:
@@ -27,6 +32,7 @@ class Git:
             check=True,
             capture_output=True,
             text=True,
+            cwd=self.path,
         )
 
     def push_tag(self, tag_name: str) -> None:
@@ -35,6 +41,7 @@ class Git:
             check=True,
             capture_output=True,
             text=True,
+            cwd=self.path,
         )
 
     def push(self) -> None:
@@ -43,6 +50,7 @@ class Git:
             check=True,
             capture_output=True,
             text=True,
+            cwd=self.path,
         )
 
     def add(self, file: str) -> None:
@@ -51,6 +59,7 @@ class Git:
             check=True,
             capture_output=True,
             text=True,
+            cwd=self.path,
         )
 
     def commit(self, message: str) -> None:
@@ -59,6 +68,7 @@ class Git:
             check=True,
             capture_output=True,
             text=True,
+            cwd=self.path,
         )
 
     def list_tags(self) -> list[str]:
@@ -69,10 +79,10 @@ class Git:
             check=True,
             capture_output=True,
             text=True,
+            cwd=self.path,
         )
         tags = result.stdout.strip().splitlines()
         return tags
 
 
 __all__ = ["Git"]
-
