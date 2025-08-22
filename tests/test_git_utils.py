@@ -1,4 +1,3 @@
-import os
 import shlex
 import subprocess
 
@@ -41,12 +40,7 @@ def test_list_tags_sorted_alphanumerically(tmp_path):
             text=True,
         )
 
-    cwd = os.getcwd()
-    os.chdir(repo_path)
-    try:
-        tags = Git().list_tags()
-    finally:
-        os.chdir(cwd)
+    tags = Git(repo_path).list_tags()
 
     assert tags == ["v1", "v2", "v10"]
 

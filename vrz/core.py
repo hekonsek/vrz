@@ -12,7 +12,7 @@ class Vrz:
     def __init__(self, path: Path = Path.cwd()):
         self.path = path
         self.poetry = Poetry(path)
-        self.git = Git()
+        self.git = Git(path)
         self.version_substitution = VersionSubstitution()
 
     def latest(self) -> Version:
