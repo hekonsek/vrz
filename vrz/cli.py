@@ -1,6 +1,7 @@
 from pathlib import Path
 from typing import Optional
 
+import semver
 import typer
 from typer import Typer
 
@@ -11,10 +12,7 @@ from vrz.poetry_utils import Poetry
 
 def _bump_minor(version: str) -> str:
     """Return a version string with the minor part incremented."""
-    parts = version.split(".")
-    major = int(parts[0]) if parts else 0
-    minor = int(parts[1]) if len(parts) > 1 else 0
-    return f"{major}.{minor + 1}.0"
+    return str(semver.VersionInfo.parse(version).bump_minor())
 
 def main():
     poetry = Poetry()
