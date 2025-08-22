@@ -2,7 +2,7 @@ import os
 import shlex
 import subprocess
 
-from vrz.core import Git
+from vrz.git_utils import Git
 
 
 def test_list_tags_sorted_alphanumerically(tmp_path):

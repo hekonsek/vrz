@@ -4,7 +4,9 @@ from typing import Optional
 import typer
 from typer import Typer
 
-from vrz.core import Git, Poetry, VersionSubstitution
+from vrz.core import VersionSubstitution
+from vrz.git_utils import Git
+from vrz.poetry_utils import Poetry
 
 
 def _bump_minor(version: str) -> str:

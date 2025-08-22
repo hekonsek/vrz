@@ -1,4 +1,4 @@
-from vrz.core import Poetry
+from vrz.poetry_utils import Poetry
 
 def test_inited_project_returns_project_name(tmp_path):
     # GIVEN a temporary directory for initializing a new Poetry project
