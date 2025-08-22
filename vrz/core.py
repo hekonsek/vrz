@@ -20,9 +20,7 @@ class Vrz:
             version_str = self.poetry.version_read()
             return Version.parse(version_str)
         else:
-            tags = self.git.list_tags()
-            latest_tag = tags[-1] if tags else "0.0.0"
-            return Version.parse(latest_tag)
+            return self.git.latest_version() or Version.parse("0.0.0")
 
 class VersionSubstitution:
     """Replace occurrences of a version string in a file."""

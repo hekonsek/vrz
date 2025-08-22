@@ -5,6 +5,9 @@ from __future__ import annotations
 from pathlib import Path
 import shlex
 import subprocess
+from typing import Optional
+
+from semver import Version
 
 
 class Git:
@@ -84,5 +87,17 @@ class Git:
         tags = result.stdout.strip().splitlines()
         return tags
 
-
-__all__ = ["Git"]
+    def list_version_tags(self) -> list[str]:
+        """Return list of Git version tags sorted alphanumerically ascending."""
+        return [tag for tag in self.list_tags() if tag.startswith("v")]
+    
+    def latest_version_tag(self) -> Optional[str]:
+        version_tags = self.list_version_tags()
+        return version_tags[-1] if version_tags else None
+    
+    def latest_version(self) -> Optional[Version]:
+        latest_tag = self.latest_version_tag()
+        if latest_tag:
+            return Version.parse(latest_tag.lstrip("v"))
+        else:
+            return None
