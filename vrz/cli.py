@@ -40,7 +40,7 @@ def main():
             new_version = poetry.version_read()
             typer.echo(f"Version bumped to {new_version}.")
         else:
-            tags = git.list_tags() if git.is_git_repo() else []
+            tags = git.list_tags()
             old_version = tags[-1].lstrip("v") if tags else "0.0.0"
             new_version = _bump_minor(old_version)
             typer.echo(f"Version bumped to {new_version}.")
