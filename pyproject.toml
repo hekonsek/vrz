@@ -11,9 +11,6 @@ dependencies = [
     "typer (>=0.15.2,<0.16.0)",
     "requests (>=2.32.3,<3.0.0)",
 
-    # Downgrading click until this bug is fixed:
-    # https://github.com/ai-dynamo/dynamo/issues/1039
-    "click (<8.2.0)",
     "semver (>=3,<4)"
 ]
 
