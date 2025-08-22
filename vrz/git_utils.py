@@ -29,6 +29,15 @@ class Git:
         except subprocess.CalledProcessError:
             return False
 
+    def fetch_tags(self) -> None:
+        subprocess.run(
+            shlex.split("git fetch --tags"),
+            check=True,
+            capture_output=True,
+            text=True,
+            cwd=self.path,
+        )
+
     def create_tag(self, tag_name: str) -> None:
         subprocess.run(
             shlex.split(f"git tag {tag_name}"),

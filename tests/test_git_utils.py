@@ -46,4 +46,5 @@ def test_list_tags_sorted_alphanumerically(tmp_path):
 
 
 def test_should_find_latest_version():
+    Git().fetch_tags()
     assert Git().latest_version() is not None
