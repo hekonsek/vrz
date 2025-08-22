@@ -8,7 +8,7 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "typer (>=0.15.2,<0.16.0)",
+    "typer (>=0.16.1,<0.17.0)",
     "requests (>=2.32.3,<3.0.0)",
 
     "semver (>=3,<4)"
@@ -24,5 +24,5 @@ vrz = "vrz.cli:main"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"
-check-depz = "^0.15.0"
+check-depz = "^0.16.0"
 

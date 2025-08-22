@@ -116,18 +116,18 @@ files = [
 
 [[package]]
 name = "check-depz"
-version = "0.15.0"
+version = "0.16.0"
 description = ""
 optional = false
 python-versions = ">=3.12"
 groups = ["dev"]
 files = [
-    {file = "check_depz-0.15.0-py3-none-any.whl", hash = "sha256:68d219d64377b4ae11d61091214c2c0d5d49f36176d69ddde6a84134560b0e77"},
-    {file = "check_depz-0.15.0.tar.gz", hash = "sha256:38a0346c48f3f7e981e4d4db6c6a903cb640cc5369288d92b272bdc57352e9c6"},
+    {file = "check_depz-0.16.0-py3-none-any.whl", hash = "sha256:ba7630b96c122f143e91a6c911281fe619f315908b9f8cc708e02e0e9933ee30"},
+    {file = "check_depz-0.16.0.tar.gz", hash = "sha256:964e6c393de6d2d12c702538e4b3f34c9d1cddf3755d361cc3f2925a9d4ed2d0"},
 ]
 
 [package.dependencies]
-typer = ">=0.15.3,<0.16.0"
+typer = ">=0.16.1,<0.17.0"
 
 [[package]]
 name = "click"
@@ -353,18 +353,18 @@ files = [
 
 [[package]]
 name = "typer"
-version = "0.15.4"
+version = "0.16.1"
 description = "Typer, build great CLIs. Easy to code. Based on Python type hints."
 optional = false
 python-versions = ">=3.7"
 groups = ["main", "dev"]
 files = [
-    {file = "typer-0.15.4-py3-none-any.whl", hash = "sha256:eb0651654dcdea706780c466cf06d8f174405a659ffff8f163cfbfee98c0e173"},
-    {file = "typer-0.15.4.tar.gz", hash = "sha256:89507b104f9b6a0730354f27c39fae5b63ccd0c95b1ce1f1a6ba0cfd329997c3"},
+    {file = "typer-0.16.1-py3-none-any.whl", hash = "sha256:90ee01cb02d9b8395ae21ee3368421faf21fa138cb2a541ed369c08cec5237c9"},
+    {file = "typer-0.16.1.tar.gz", hash = "sha256:d358c65a464a7a90f338e3bb7ff0c74ac081449e53884b12ba658cbd72990614"},
 ]
 
 [package.dependencies]
-click = ">=8.0.0,<8.2"
+click = ">=8.0.0"
 rich = ">=10.11.0"
 shellingham = ">=1.3.0"
 typing-extensions = ">=3.7.4.3"
@@ -402,4 +402,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12"
-content-hash = "eb34e9a1c33082450bbea972cf2e0a36f3efb6a0af8bc9d35d921709e80cb545"
+content-hash = "bdc20f4418e2e3b9e2705a4cc0541f2617b3be163657234f4fd12c1b680918b8"
