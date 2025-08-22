@@ -5,7 +5,7 @@ import semver
 import typer
 from typer import Typer
 
-from vrz.core import VersionSubstitution
+from vrz.core import VersionSubstitution, Vrz
 from vrz.git_utils import Git
 from vrz.poetry_utils import Poetry
 
@@ -18,6 +18,7 @@ def main():
     poetry = Poetry()
     git = Git()
     version_substitution = VersionSubstitution()
+    vrz = Vrz(Path.cwd())
     
     app = Typer(
         no_args_is_help=True, 
@@ -71,8 +72,8 @@ def main():
 
     @app.command()
     def latest():
-        """Get the latest version of the package."""
-        typer.echo(poetry.version_read())
+        """Get the latest version of the project."""
+        typer.echo(vrz.latest())
 
     app()
 

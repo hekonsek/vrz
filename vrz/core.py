@@ -1,11 +1,28 @@
-"""Core utilities for vrz.
-
-Currently this module provides the :class:`VersionSubstitution` helper which
-allows replacing version strings inside arbitrary files.  Git and Poetry
-utilities used to live here, but have been moved into dedicated modules to
-keep concerns separated.
+"""Core library for vrz.
 """
 
+from pathlib import Path
+
+from semver import Version
+from vrz.git_utils import Git
+from vrz.poetry_utils import Poetry
+
+
+class Vrz:
+    def __init__(self, path: Path = Path.cwd()):
+        self.path = path
+        self.poetry = Poetry(path)
+        self.git = Git()
+        self.version_substitution = VersionSubstitution()
+
+    def latest(self) -> Version:
+        if self.poetry.is_poetry_project():
+            version_str = self.poetry.version_read()
+            return Version.parse(version_str)
+        else:
+            tags = self.git.list_tags()
+            latest_tag = tags[-1] if tags else "0.0.0"
+            return Version.parse(latest_tag)
 
 class VersionSubstitution:
     """Replace occurrences of a version string in a file."""
