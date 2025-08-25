@@ -116,14 +116,14 @@ files = [
 
 [[package]]
 name = "check-depz"
-version = "0.16.0"
+version = "0.17.0"
 description = ""
 optional = false
 python-versions = ">=3.12"
 groups = ["dev"]
 files = [
-    {file = "check_depz-0.16.0-py3-none-any.whl", hash = "sha256:ba7630b96c122f143e91a6c911281fe619f315908b9f8cc708e02e0e9933ee30"},
-    {file = "check_depz-0.16.0.tar.gz", hash = "sha256:964e6c393de6d2d12c702538e4b3f34c9d1cddf3755d361cc3f2925a9d4ed2d0"},
+    {file = "check_depz-0.17.0-py3-none-any.whl", hash = "sha256:2e6ac49344b650e1dca9682a8325a006ac37b13c841c4e6d2dfd22fc8d305c8d"},
+    {file = "check_depz-0.17.0.tar.gz", hash = "sha256:f370385de81eb6315ef759b467e8167f7bc318329bdfed6c25dce3a275ceaaf5"},
 ]
 
 [package.dependencies]
@@ -402,4 +402,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12"
-content-hash = "bdc20f4418e2e3b9e2705a4cc0541f2617b3be163657234f4fd12c1b680918b8"
+content-hash = "db4201e4bb03be5684734f3b7180166351bb5c3f429f9ec0ded0e10a609e95e9"
