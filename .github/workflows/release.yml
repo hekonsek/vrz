@@ -21,9 +21,13 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install vrz (pipx)
+      - name: Install vrz
         run: |
           pipx install vrz
+
+      - name: Install poetry
+        run: |
+          pipx install poetry
 
       - name: Configure git user (triggering user)
         run: |
@@ -35,7 +39,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_API_TOKEN }} # Use only for PyPI hosted projects
         run: |
-          vrz minor
+          vrz minor --update-file=README.md
 
       - name: Determine new version
         id: version
