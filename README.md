@@ -35,6 +35,19 @@ Publishing to PyPI done.
 - create and push Git tag
 - publish package to PyPI (if current project is already present in PyPI index)
 
+## Release GitHub workflow
+
+[Release workflow](.github/workflows/release.yml) from this project can be used as a copy-paste ready template for your project:
+
+```bash
+cd myproject
+mkdir -p .github/workflows
+curl -fsSL "https://raw.githubusercontent.com/hekonsek/vrz/refs/heads/main/.github/workflows/release.yml" \
+  -o .github/workflows/release.yml
+```
+
+With this workflow you can just go straight to "Release" workflow in your "Action" and trigger workflow manually using "Run workflow" to release new minor version of your project.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
