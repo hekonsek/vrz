@@ -33,6 +33,7 @@ jobs:
       - name: Bump minor version and tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_API_TOKEN }} # Use only for PyPI hosted projects
         run: |
           vrz minor
 
