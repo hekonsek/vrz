@@ -1,6 +1,6 @@
 [project]
 name = "vrz"
-version = "0.30.0"
+version = "0.31.0"
 description = ""
 authors = [
     {name = "Henryk Konsek",email = "hekonsek@gmail.com"}
